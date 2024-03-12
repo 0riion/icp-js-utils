@@ -1,6 +1,8 @@
 const { HttpAgent } = require("@dfinity/agent");
 const { Ed25519KeyIdentity } = require("@dfinity/identity");
 
+const HTTP_AGENT_HOST = "https://identity.ic0.app";
+
 /**
  * @class SeedAuth
  * @description Generate http agent to interact with ICP from a seed
@@ -86,11 +88,11 @@ class SeedAuth {
 
     if (seed) {
       const identity = SeedAuth.seedToIdentity(seed);
-      const agent = new HttpAgent({ identity, host: options?.host });
+      const agent = new HttpAgent({ identity, host: options?.host || HTTP_AGENT_HOST });
       return agent;
     }
 
-    const agent = new HttpAgent({ identity, host: options?.host });
+    const agent = new HttpAgent({ identity, host: options?.host || HTTP_AGENT_HOST });
     return agent;
   }
 }

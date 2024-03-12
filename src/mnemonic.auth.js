@@ -24,7 +24,8 @@ class MnemonicAuth {
     const isValid = MnemonicAuth.validateMnemonic(mnemonic);
     if (!isValid || MnemonicAuth.isMnemonicEmpty(mnemonic))
       throw new Error("Invalid mnemonic");
-    return Secp256k1KeyIdentity.fromSeedPhrase(phrase);
+
+    return Secp256k1KeyIdentity.fromSeedPhrase(mnemonic);
   }
 
   static async createAgent({ mnemonic, identity }) {
