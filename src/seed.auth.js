@@ -47,6 +47,9 @@ class SeedAuth {
     if (this._isSeedEmpty(seed)) return this._identityFromEmptySeed(seed);
 
     const isValid = this._validateSeed(seed);
+    if (!isValid) throw new Error('Invalid seed');
+
+    
     const seedBuffer = new Uint8Array(new ArrayBuffer(32));
   }
 }
