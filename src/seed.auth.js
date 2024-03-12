@@ -1,4 +1,5 @@
-const { Ed25519KeyIdentity } = require("@dfinity/agent");
+const { HttpAgent } = require("@dfinity/agent");
+const { Ed25519KeyIdentity } = require("@dfinity/identity");
 
 /**
  * @class SeedAuth
@@ -54,6 +55,20 @@ class SeedAuth {
     const seedBuffer = new Uint8Array(new ArrayBuffer(32));
     seedBuffer.set(new TextEncoder().encode(seed));
     return Ed25519KeyIdentity.generate(seedBuffer);
+  }
+
+  static async createAgent(options) {
+    if (!options.seed || !options.identity)
+      throw new Error("Seed or Identity is required");
+    const { seed, identity } = options;
+
+    if (seed) {
+      const identity = SeedAuth.seedToIdentity(seed);
+      const agent = new HttpAgent({ identity, host: options?.host });
+      return agent;
+    }
+
+    return agent;
   }
 }
 
