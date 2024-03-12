@@ -10,15 +10,33 @@ class SeedAuth {
   }
 
   /**
+   * Checks if the seed is empty.
+   * @param {string} seed Seed to check
+   * @returns {boolean} True if the seed is empty, false otherwise.
+   * @private
+   * @memberof SeedAuth
+   * @example
+   * SeedAuth._isSeedEmpty(seed);
+   * // => true
+   * */
+  _isSeedEmpty(seed) {
+    return seed.length === 0;
+  }
+
+  /**
    * Validates the provided seed.
    *
    * @param {string} seed Seed to validate
    * @returns {boolean} True if the seed is valid, false otherwise.
+   * @private
+   * @memberof SeedAuth
+   * @example
+   * SeedAuth._validateSeed(seed);
+   * // => true
    */
   _validateSeed(seed) {
-    if (seed.length === 0) return false;
-    if (!seed.length || seed.length > 32) return false;
-    return true;
+    if (seed.length && seed.length > 0 && seed.length < 32) return true;
+    return false;
   }
 
   _identityFromEmptySeed(seed) {
@@ -26,6 +44,8 @@ class SeedAuth {
   }
 
   static seedToIdentity(seed) {
+    if (this._isSeedEmpty(seed)) return this._identityFromEmptySeed(seed);
+
     const isValid = this._validateSeed(seed);
     const seedBuffer = new Uint8Array(new ArrayBuffer(32));
   }
