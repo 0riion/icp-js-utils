@@ -2,7 +2,8 @@ const MnemonicAuth = require("../../src/mnemonic.auth.js");
 const { Secp256k1KeyIdentity } = require("@dfinity/identity-secp256k1");
 
 // https://iancoleman.io/bip39/
-const VALID_MNEMONIC = "crazy world recipe sad gentle inject box aisle item tired glass merit dinosaur author gorilla";
+const VALID_MNEMONIC =
+  "crazy world recipe sad gentle inject box aisle item tired glass merit dinosaur author gorilla";
 const INVALID_MNEMONIC = "%$%#@";
 
 describe("MnemonicAuth", () => {
