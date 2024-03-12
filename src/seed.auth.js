@@ -9,6 +9,12 @@ class SeedAuth {
     this.options = options;
   }
 
+  /**
+   * Validates the provided seed.
+   *
+   * @param {string} seed Seed to validate
+   * @returns {boolean} True if the seed is valid, false otherwise.
+   */
   _validateSeed(seed) {
     if (seed.length === 0) return false;
     if (!seed.length || seed.length > 32) return false;
