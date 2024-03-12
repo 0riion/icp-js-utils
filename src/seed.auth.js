@@ -19,10 +19,10 @@ class SeedAuth {
    * @private
    * @memberof SeedAuth
    * @example
-   * SeedAuth._isSeedEmpty(seed);
+   * SeedAuth.isSeedEmpty(seed);
    * // => true
-   * */
-  _isSeedEmpty(seed) {
+   */
+  static isSeedEmpty(seed) {
     return seed.length === 0;
   }
 
@@ -34,11 +34,13 @@ class SeedAuth {
    * @private
    * @memberof SeedAuth
    * @example
-   * SeedAuth._validateSeed(seed);
+   * SeedAuth.validateSeed(seed);
    * // => true
    */
-  _validateSeed(seed) {
-    if (seed.length && seed.length > 0 && seed.length < 32) return true;
+  static validateSeed(seed) {
+    if (seed.length && seed.length > 0 && seed.length < 32) {
+      return true; // Valid seed length is between 1 and 32 characters
+    }
     return false;
   }
 
@@ -55,8 +57,8 @@ class SeedAuth {
    * // => Ed25519KeyIdentity
    */
   static seedToIdentity(seed) {
-    const isValid = this._validateSeed(seed);
-    if (!isValid || this._isSeedEmpty(seed)) throw new Error("Invalid seed");
+    const isValid = SeedAuth.validateSeed(seed);
+    if (!isValid || SeedAuth.isSeedEmpty(seed)) throw new Error("Invalid seed");
 
     const seedBuffer = new Uint8Array(new ArrayBuffer(32));
     seedBuffer.set(new TextEncoder().encode(seed));
