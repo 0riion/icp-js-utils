@@ -38,9 +38,7 @@ class SeedAuth {
    * // => true
    */
   static validateSeed(seed) {
-    if (seed.length && seed.length > 0 && seed.length < 32) {
-      return true; // Valid seed length is between 1 and 32 characters
-    }
+    if (seed.length && seed.length > 0 && seed.length <= 32) return true;
     return false;
   }
 
@@ -81,7 +79,7 @@ class SeedAuth {
    * SeedAuth.create
    * // => HttpAgent
    */
-  static async createAgent(options) {
+  static createAgent(options) {
     if (!options.seed && !options.identity)
       throw new Error("Seed or Identity is required");
     const { seed, identity } = options;
