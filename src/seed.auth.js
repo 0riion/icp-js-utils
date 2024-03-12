@@ -1,6 +1,5 @@
 const { HttpAgent } = require("@dfinity/agent");
 const { Ed25519KeyIdentity } = require("@dfinity/identity");
-const { AuthClient } = require("@dfinity/auth-client");
 
 /**
  * @class SeedAuth
